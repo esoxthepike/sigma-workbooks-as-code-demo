@@ -164,6 +164,39 @@ document:
       timeline:
         columnId: ku-month
       periodComparison: month
+    - id: kpi-margin
+      kind: kpi-chart
+      source:
+        elementId: sales-source
+        kind: table
+      columns:
+        - id: km-val
+          formula: Sum([Sales Data/Profit]) / Sum([Sales Data/Revenue])
+          name: Margin
+          format:
+            kind: number
+            formatString: 0.0%
+        - id: km-month
+          formula: DateTrunc("month", [Sales Data/Date])
+          name: Month
+      value:
+        columnId: km-val
+        fontSize: 20
+      name:
+        text: Gross Margin
+        fontSize: 16
+      layout:
+        anchor: middle
+        verticalAnchor: start
+      comparison:
+        colorGood: '#16a34a'
+        colorBad: '#dc2626'
+      trend:
+        visibility: hidden
+        shape: line
+      timeline:
+        columnId: km-month
+      periodComparison: month      
     - id: chart-by-product
       kind: donut-chart
       source:
@@ -406,6 +439,7 @@ document:
           <Element elementId="kpi-profit" gridColumn="3 / 6" gridRow="1 / 5"/>
           <Element elementId="kpi-orders" gridColumn="6 / 8" gridRow="1 / 5"/>
           <Element elementId="kpi-units" gridColumn="8 / 11" gridRow="1 / 5"/>
+          <Element elementId="kpi-margin" gridColumn="11 / 13" gridRow="1 / 5"/>
         </Container>
       </Container>
       <Element elementId="chart-by-product" gridColumn="1 / 13" gridRow="7 / 17"/>
