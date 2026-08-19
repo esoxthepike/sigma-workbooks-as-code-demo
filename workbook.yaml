@@ -1,6 +1,5 @@
-name: "Plugs Electronics — Sales Overview"
-folderId: "7p1lf6Fy2vAlcaILTzIoW5"
-description: "Sales performance dashboard managed via GitHub. Source: sample data via custom SQL."
+name: WBC QuickStart
+folderId: f3421943-38c7-48b4-a5af-2e3532a66421
 document:
   schemaVersion: 1
   elements:
@@ -170,15 +169,15 @@ document:
         elementId: sales-source
         kind: table
       columns:
+        - id: km-month
+          formula: DateTrunc("month", [Sales Data/Date])
+          name: Month
         - id: km-val
           formula: Sum([Sales Data/Profit]) / Sum([Sales Data/Revenue])
           name: Margin
           format:
             kind: number
             formatString: 0.0%
-        - id: km-month
-          formula: DateTrunc("month", [Sales Data/Date])
-          name: Month
       value:
         columnId: km-val
         fontSize: 20
@@ -187,7 +186,6 @@ document:
         fontSize: 16
       layout:
         anchor: middle
-        verticalAnchor: start
       comparison:
         colorGood: '#16a34a'
         colorBad: '#dc2626'
@@ -196,7 +194,7 @@ document:
         shape: line
       timeline:
         columnId: km-month
-      periodComparison: month      
+      periodComparison: month
     - id: chart-by-product
       kind: donut-chart
       source:
@@ -310,7 +308,7 @@ document:
     - id: sales-source
       kind: table
       source:
-        connectionId: "f394710f-9230-4963-bc96-9c3a0ca0c323"
+        connectionId: f394710f-9230-4963-bc96-9c3a0ca0c323
         statement: |
           WITH sales AS (
             SELECT DATEADD('day', -170, CURRENT_DATE()) AS order_date, 'West' AS store_region, 'SF Downtown' AS store_name, 'Phones' AS product_type, 'Electronics' AS product_family, 1001 AS order_number, 899.99 AS revenue, 314.99 AS profit, 585.00 AS cogs, 1 AS quantity
